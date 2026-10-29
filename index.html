@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FjordLedger – Money spreadsheets</title>
+<meta name="description" content="Money spreadsheets for freelancers and small businesses. Excel + Google Sheets. Instant download on Etsy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FjordLedger – Money spreadsheets">
+<meta property="og:description" content="Find the sheet from our videos. Excel + Google Sheets, instant download on Etsy.">
+<meta property="og:url" content="https://postsiamedia-ctrl.github.io/">
+<meta property="og:image" content="https://postsiamedia-ctrl.github.io/img/annual-budget-sinking-funds.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one phone-width column of "sheets" – each product is a spreadsheet tab with its key cell (fx) from the video. Brand colours from the FjordLedger logo, same as the videos. */
+:root{
+  --paper:#FBF4E8; --card:#FFFFFF; --ink:#0E2A38; --muted:#56656E; --line:#E7DDCB; --cell:#EEF3F5;
+  --sun:#FFC24B; --sun-ink:#0E2A38; --coral:#C9472A; --teal:#1C8A7A; --btn:#0E2A38; --btn-ink:#FFC24B;
+  --display:"Archivo","Arial Black",system-ui,sans-serif; --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0A1E28; --card:#10293A; --ink:#F4ECDD; --muted:#9FB2BC; --line:#1E3B4B; --cell:#163447;
+  --sun:#FFC24B; --sun-ink:#0E2A38; --coral:#FF8B6D; --teal:#4FC7B3; --btn:#FFC24B; --btn-ink:#0E2A38; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0A1E28; --card:#10293A; --ink:#F4ECDD; --muted:#9FB2BC; --line:#1E3B4B; --cell:#163447;
+  --sun:#FFC24B; --sun-ink:#0E2A38; --coral:#FF8B6D; --teal:#4FC7B3; --btn:#FFC24B; --btn-ink:#0E2A38; color-scheme:dark}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:540px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.wrap > *,.body > *{min-width:0}
+*,*::before,*::after{box-sizing:border-box}
+.sheet,.sheet img{max-width:100%}
+.seen li,.pitch,h2{overflow-wrap:anywhere}
+header{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 16px;align-items:center}
+header img{width:76px;height:76px;border-radius:20px;box-shadow:0 8px 24px -12px rgba(14,42,56,.45)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(30px,8vw,40px);line-height:1;letter-spacing:-.02em;margin:0}
+.tag{margin:4px 0 0;color:var(--muted);font-size:15px;text-wrap:pretty}
+.facts{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.facts li{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:8px;padding:4px 9px;color:var(--muted);background:var(--card)}
+.lead{margin:0;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.01em;text-wrap:balance}
+.lead span{color:var(--muted);font-family:var(--body);font-weight:500;font-size:15px;display:block;letter-spacing:0;margin-top:2px}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 14px 30px -24px rgba(14,42,56,.6)}
+.tab{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--line)}
+.tab span:first-child{background:var(--ink);color:var(--paper);padding:3px 10px;border-radius:6px 6px 0 0;margin-bottom:-10px;padding-bottom:9px}
+.tab .fmt{color:var(--muted)}
+.sheet img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:var(--cell)}
+.body{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:16px 16px 18px}
+h2{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.15;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.fx{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-variant-numeric:tabular-nums}
+.fx span{padding:8px 11px;display:flex;align-items:center;min-width:0}
+.fxl{font-family:var(--mono);font-size:12px;color:var(--muted);border-right:1px solid var(--line);font-style:italic}
+.fxn{font-weight:600;font-size:14px;background:var(--cell)}
+.fxv{font-family:var(--display);font-weight:900;font-size:20px;background:var(--sun);color:var(--sun-ink)}
+.pitch{margin:0;color:var(--muted);text-wrap:pretty}
+.seen{display:grid;gap:6px}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.seen ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.seen li{font-size:13px;font-weight:600;border-radius:999px;padding:5px 11px;background:var(--cell)}
+.buy{display:flex;justify-content:center;align-items:center;gap:8px;min-height:50px;border-radius:12px;background:var(--btn);color:var(--btn-ink);font-family:var(--display);font-weight:800;font-size:17px;text-decoration:none;letter-spacing:.01em;transition:transform .12s ease,filter .2s}
+.buy::after{content:"\2197";font-family:var(--body);font-weight:600}
+.buy:hover{filter:brightness(1.12)}.buy:active{transform:translateY(1px)}
+.buy:focus-visible,.shop:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.shop{display:flex;justify-content:center;align-items:center;min-height:50px;border-radius:12px;border:2px solid var(--ink);color:var(--ink);font-weight:700;text-decoration:none}
+footer{display:grid;gap:14px;text-align:center}
+footer p{margin:0;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="img/logo.png" alt="FjordLedger logo" width="76" height="76">
+    <div><h1>FjordLedger</h1><p class="tag">Money spreadsheets for freelancers and small businesses.</p></div>
+    <ul class="facts"><li>Excel + Google Sheets</li><li>Instant download</li><li>Made by a trained accountant</li></ul>
+  </header>
+  <p class="lead">Saw one of our videos? <span>Find the exact sheet below. Each card shows the number from the video.</span></p>
+<article class="sheet" id="annual-budget-sinking-funds">
+<div class="tab"><span>Sinking Funds</span><span class="fmt">Excel + Google Sheets</span></div>
+<img src="img/annual-budget-sinking-funds.jpg" alt="Annual Budget &amp; Sinking Funds spreadsheet preview" loading="lazy" width="720" height="540">
+<div class="body">
+<h2>Annual Budget &amp; Sinking Funds</h2>
+<div class="fx" aria-label="Save per month: $1,578"><span class="fxl">fx</span><span class="fxn">Save per month</span><span class="fxv">$1,578</span></div>
+<p class="pitch">Add every big cost and its date. It tells you exactly what to save each month.</p>
+<div class="seen"><span class="lbl">From the videos</span><ul><li>Christmas is 8 weeks away. Is the money ready? 🎄</li><li>Stop calling it a “surprise” bill 🙄</li></ul></div>
+<a class="buy" href="https://www.etsy.com/listing/4604838884?utm_source=fjordledger_bio&amp;utm_medium=social">Get it on Etsy</a>
+</div></article>
+<article class="sheet" id="subscription-cost-tracker">
+<div class="tab"><span>Subscriptions</span><span class="fmt">Excel + Google Sheets</span></div>
+<img src="img/subscription-cost-tracker.jpg" alt="Subscription Cost Tracker spreadsheet preview" loading="lazy" width="720" height="540">
+<div class="body">
+<h2>Subscription Cost Tracker</h2>
+<div class="fx" aria-label="Yearly cost: $1,332"><span class="fxl">fx</span><span class="fxn">Yearly cost</span><span class="fxv">$1,332</span></div>
+<p class="pitch">Every app and tool in one sheet: the real monthly and yearly cost, and what renews next.</p>
+<div class="seen"><span class="lbl">From the videos</span><ul><li>POV: you finally add up all your subscriptions 💀</li><li>Cancel these before they renew 👀</li></ul></div>
+<a class="buy" href="https://www.etsy.com/listing/4604839014?utm_source=fjordledger_bio&amp;utm_medium=social">Get it on Etsy</a>
+</div></article>
+<article class="sheet" id="invoice-payment-tracker">
+<div class="tab"><span>Invoices</span><span class="fmt">Excel + Google Sheets</span></div>
+<img src="img/invoice-payment-tracker.jpg" alt="Invoice &amp; Payment Tracker spreadsheet preview" loading="lazy" width="720" height="540">
+<div class="body">
+<h2>Invoice &amp; Payment Tracker</h2>
+<div class="fx" aria-label="Overdue: $4,150"><span class="fxl">fx</span><span class="fxn">Overdue</span><span class="fxv">$4,150</span></div>
+<p class="pitch">Log each invoice once. Balances and overdue flags update, so you know who to chase first.</p>
+<div class="seen"><span class="lbl">From the videos</span><ul><li>When the client says “payment is on its way” 🙃</li><li>Your clients owe you $4,150. Here&#x27;s who to chase 👇</li></ul></div>
+<a class="buy" href="https://www.etsy.com/listing/4604791123?utm_source=fjordledger_bio&amp;utm_medium=social">Get it on Etsy</a>
+</div></article>
+<article class="sheet" id="small-business-bookkeeping">
+<div class="tab"><span>Transactions</span><span class="fmt">Excel + Google Sheets</span></div>
+<img src="img/small-business-bookkeeping.jpg" alt="Small Business Bookkeeping spreadsheet preview" loading="lazy" width="720" height="540">
+<div class="body">
+<h2>Small Business Bookkeeping</h2>
+<div class="fx" aria-label="Set aside for income tax (25%): $352"><span class="fxl">fx</span><span class="fxn">Set aside for income tax (25%)</span><span class="fxv">$352</span></div>
+<p class="pitch">Log each payment once. Profit, sales tax/VAT and your tax set-aside fill in by themselves.</p>
+<div class="seen"><span class="lbl">From the videos</span><ul><li>You don&#x27;t need accounting software. You need this 👇</li><li>POV: your books are already done at tax time 😌</li></ul></div>
+<a class="buy" href="https://www.etsy.com/listing/4604793039?utm_source=fjordledger_bio&amp;utm_medium=social">Get it on Etsy</a>
+</div></article>
+<article class="sheet" id="irregular-income-budget">
+<div class="tab"><span>Budget</span><span class="fmt">Excel + Google Sheets</span></div>
+<img src="img/irregular-income-budget.jpg" alt="Irregular Income Budget spreadsheet preview" loading="lazy" width="720" height="540">
+<div class="body">
+<h2>Irregular Income Budget</h2>
+<div class="fx" aria-label="Average per month: $5,267"><span class="fxl">fx</span><span class="fxn">Average per month</span><span class="fxv">$5,267</span></div>
+<p class="pitch">Uneven client payments? Pay yourself a steady monthly salary from a buffer.</p>
+<div class="seen"><span class="lbl">From the videos</span><ul><li>Feast month. Famine month. Same rent 😬</li><li>POV: you pay yourself a salary. As a freelancer 😌</li></ul></div>
+<a class="buy" href="https://www.etsy.com/listing/4600872984?utm_source=fjordledger_bio&amp;utm_medium=social">Get it on Etsy</a>
+</div></article>
+  <footer>
+    <a class="shop" href="https://www.etsy.com/shop/FjordLedger?utm_source=fjordledger_bio&amp;utm_medium=social">See all templates in the shop</a>
+    <p>FjordLedger · Digital downloads, sold on Etsy</p>
+  </footer>
+</div>
+</body>
+</html>
